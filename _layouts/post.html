@@ -4,7 +4,17 @@ disqus: false
 archive: false
 post_class: post-template
 ---
-
+<style>
+    .newdashline::after {
+    content: "";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+    width: 2px;
+    background-color: rgb(206, 201, 201);
+} 
+</style>
 <div class="entry-header">
     <!-- Post Title -->
     <h1 class="posttitle">{{ page.title }}</h1>
@@ -28,6 +38,41 @@ post_class: post-template
         </div>            
     </div>
     {% endif %}
+    <div class="d-flex justify-content-between" style="margin-top: 15px; width: 940px;"> 
+
+    <div class="col-6 d-inline-flex flex-wrap">
+    
+        <!-- Categories -->
+        {% assign sortedCategories = page.categories | sort %}
+        {% unless sortedCategories == empty %}
+        <p style="margin-right: 5px;">Catogery </p>
+        <div class="newdashline" style="margin-top: 0px;margin-right: 7px;"></div>
+        {% for category in sortedCategories %}
+        <h5 style="margin-right: 5px;white-space: nowrap;">
+            <a class="smoothscroll badge badge-primary text-capitalize" href="{{site.baseurl}}/categories#{{ category | replace: " ","-" }}">{{ category }}</a>                
+        </h5>
+        {% endfor %}        
+        {% endunless %}
+
+    </div>
+
+    <div class="col-6 d-inline-flex flex-wrap">
+
+        <!-- Tags -->  
+        {% assign sortedTags = page.tags | sort %}
+        {% unless sortedTags == empty %}
+        <p style="margin-right: 5px;">Tags </p>  
+        <div class="newdashline" style="margin-top: 0px;margin-right: 7px;"></div> 
+        {% for tag in sortedTags %}
+        <h5 style="margin-right: 5px;">
+            <a class="smoothscroll badge badge-primary text-capitalize" href="{{site.baseurl}}/tags#{{ tag | replace: " ","-" }}">{{ tag }}</a>               
+        </h5>
+        {% endfor %}
+        {% endunless %}
+
+    </div>    
+    </div>
+
 </div>
 
 <!-- Adsense under title if enabled from _config.yml (change your pub id and slot) -->
